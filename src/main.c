@@ -120,7 +120,7 @@ int main(int argc, char *argv[])
         }
         
         if (option_match(argv[i], "--version", 0)) {
-            printf("<Program Version Info>\n");
+            program_print_version(TRUE);
 
             return EXIT_SUCCESS;
         }
@@ -197,17 +197,9 @@ int main(int argc, char *argv[])
         // Print final newline
         fprintf(output_file, "\n");
 
-        if (fclose(output_file) == EOF) {
-                fprintf(stderr, "Fatal error while attempting to close file: %s\n", *argv);
-
-                break;
-            }
-
-        if (fclose(input_file) == EOF) {
-            fprintf(stderr, "Fatal error while attempting to close file: %s\n", *argv);
-
-            return EXIT_FAILURE;
-        }
+        // Close the file handles.
+        file_close(input_file);
+        file_close(output_file);
     }
 
     return EXIT_SUCCESS;

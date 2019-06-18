@@ -12,3 +12,11 @@ FILE* file_open(const char* filename, const char* mode) {
 
     return file_handle;
 }
+
+void file_close(FILE* file_handle) {
+    if (fclose(file_handle) == EOF) {
+        fprintf(stderr, "Fatal error while attempting to close file\n");
+
+        exit(EXIT_FAILURE);
+    }
+}
